@@ -13,13 +13,12 @@
     <meta name="apple-mobile-web-app-title" content="Google Leads">
     <meta name="theme-color" content="#1F4E78">
     
-    <!-- Favicon: PNG files (same approach as RFS) -->
+    <!-- Favicon: PNG files -->
     <link rel="icon" type="image/png" href="favicon-32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="favicon-192.png" sizes="192x192">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     
-    <!-- Open Graph (link previews in WhatsApp, Telegram, iMessage, etc.) -->
+    <!-- Open Graph -->
     <meta property="og:title" content="Google Leads">
     <meta property="og:description" content="Mobile-friendly survey app for Account Managers — track visits, manage leads, and export reports.">
     <meta property="og:type" content="website">
@@ -35,52 +34,6 @@
             background: #1F4E78;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
-        
-        /* Glass-blur loading screen — matches the app's loading style */
-        #loader {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(31, 78, 120, 0.9);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            z-index: 9999;
-            transition: opacity 0.4s ease;
-        }
-        #loader.hidden { opacity: 0; pointer-events: none; }
-        
-        /* GL Logo */
-        .logo {
-            width: 56px; height: 56px;
-            background: #fff;
-            color: #1F4E78;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 22px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        }
-        
-        #loader-text { color: #fff; font-size: 16px; font-weight: 600; }
-        #loader-subtext { color: rgba(255,255,255,0.5); font-size: 12px; margin-top: 4px; }
-        
-        /* Shimmer skeleton cards */
-        .skeleton-card {
-            width: 80%; max-width: 340px; height: 50px;
-            border-radius: 10px;
-            background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.05) 75%);
-            background-size: 200% 100%;
-            animation: shimmer 1.5s infinite;
-            margin-top: 4px;
-        }
-        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-        
         iframe {
             width: 100%;
             height: 100%;
@@ -90,23 +43,44 @@
             top: 0;
             left: 0;
         }
+        #loader {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: #1F4E78;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 18px;
+            z-index: 9999;
+            transition: opacity 0.4s ease;
+        }
+        #loader.hidden { opacity: 0; pointer-events: none; }
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid rgba(255,255,255,0.2);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        #loader-text {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        #loader-subtext { color: rgba(255,255,255,0.5); font-size: 11px; margin-top: 4px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
     <div id="loader">
-        <div class="logo">GL</div>
-        <div id="loader-text">Google Leads</div>
-        <div id="loader-subtext">Loading...</div>
-        <div style="margin-top: 20px;">
-            <div class="skeleton-card"></div>
-            <div class="skeleton-card" style="width: 70%"></div>
-            <div class="skeleton-card" style="width: 85%"></div>
-        </div>
+        <div class="spinner"></div>
+        <div id="loader-text">Loading Google Leads...</div>
+        <div id="loader-subtext">Survey &amp; Lead Management</div>
     </div>
-    
-    <!--
-        Google Leads Apps Script Web App URL
-    -->
     <iframe 
         src="https://script.google.com/macros/s/AKfycbyE86X1z5OSbNMbx_4n144qE0ut8NcSgBdAVTNO0Elg7tagXshIsw0Ic7Gu1Fy0tIWl/exec" 
         id="appFrame"
@@ -115,7 +89,6 @@
         allowusermedia
         onload="hideLoader()">
     </iframe>
-    
     <script>
         function hideLoader() {
             var loader = document.getElementById('loader');
@@ -124,7 +97,6 @@
                 setTimeout(function() { loader.style.display = 'none'; }, 400);
             }
         }
-        // Fallback: hide loader after 10 seconds even if onload doesn't fire
         setTimeout(hideLoader, 10000);
     </script>
 </body>
