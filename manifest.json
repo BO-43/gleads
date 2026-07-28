@@ -1,0 +1,24 @@
+{
+  "name": "Builder Calculator",
+  "short_name": "Builder",
+  "description": "Enterprise plan quotation calculator with multi-plan PDF generation.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ff6b00",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://emojiapi.dev/api/v1/1F9EE/512.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://emojiapi.dev/api/v1/1F9EE/512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
